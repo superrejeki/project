@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session')
+var flash = require('connect-flash');
 
 const { Pool } = require('pg')
 const pool = new Pool({
@@ -33,6 +34,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'superrahasia'
 }))
+
+app.use(flash());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

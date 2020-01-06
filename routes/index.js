@@ -14,14 +14,16 @@ router.post('/login', function(req, res, next) {
   if( emailuser && password ){
     pool.query(`SELECT * FROM users WHERE email = '${emailuser}' AND password = '${password}'`, 
     (err, response) => {
+      if(err) return res.send(err)
       if (response.rows.length > 0){
+        req.session.user = response.rows[0]
         res.redirect('/')
       }else{
-        res.send('email atau password salah')
+        res.send('username atau password salah')
       }
     })
   }else{
-    res.send('lengkapi form')
+    res.send('Lengkapi form')
   }
 })
 return router;
