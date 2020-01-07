@@ -6,6 +6,7 @@ module.exports = function(pool){
   /* GET home page. */
   router.get('/', function(req, res, next) {
     res.render('login',{
+      info: req.flash('info')
     });
   });
 router.post('/login', function(req, res, next) {
@@ -19,12 +20,24 @@ router.post('/login', function(req, res, next) {
         req.session.user = response.rows[0]
         res.redirect('/projects')
       }else{
-        res.send('username atau password salah')
+        req.flash('info', 'Password is wrong');
+        res.redirect('/');
       }
     })
   }else{
-    res.send('Lengkapi form')
+    req.flash('info', 'Email is wrong')
+    res.redirect('/');
   }
 })
+
+router.get('/logout',function(req, res){
+  req.session.destroy(function(err) {
+    if (err) throw err;
+    res.redirect('/')
+  })
+
+})
+
 return router;
 }
+

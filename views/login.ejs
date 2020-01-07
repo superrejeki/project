@@ -62,6 +62,11 @@
     </label>
   </div>
   <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  <%if ( info.length > 0){%>
+  <div class="alert alert-danger" role="alert">
+    <%=info%>
+  </div>
+  <%}%>
   <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
 </form>
 </body>

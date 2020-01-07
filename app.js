@@ -35,7 +35,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'superrahasia'
 }))
-
 app.use(flash());
 
 app.use('/', indexRouter);
