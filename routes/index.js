@@ -17,7 +17,7 @@ router.post('/login', function(req, res, next) {
       if(err) return res.send(err)
       if (response.rows.length > 0){
         req.session.user = response.rows[0]
-        res.redirect('/')
+        res.redirect('/projects')
       }else{
         res.send('username atau password salah')
       }
